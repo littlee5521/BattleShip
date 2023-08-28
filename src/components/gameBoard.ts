@@ -12,11 +12,12 @@ export const gameBoard = (player:string) => {
         tileContainer.push(tile(i))
     ]
 
-    const populateBoard = () =>{
-        boatContainer.push(battleShip(2,[3,4]))
+    const populateBoard = (length:number, location:number[]) =>{
+        boatContainer.push(battleShip(length,location))
+        location.forEach((cord) =>{
+            makeOccupied(cord)
+        })
     }
-
-    populateBoard()
 
     const checkIfOccupied = (location:number) =>{
         return  tileContainer[location].checkIsOccupied()
@@ -52,5 +53,5 @@ export const gameBoard = (player:string) => {
         return boatContainer
     }
 
-    return {tileContainer, makeOccupied, checkIfOccupied, checkIfHit, registerHit,retrieveBoatContainer }
+    return {tileContainer, makeOccupied, checkIfOccupied, checkIfHit, registerHit,retrieveBoatContainer, populateBoard}
 }

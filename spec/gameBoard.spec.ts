@@ -1,5 +1,6 @@
 import {gameBoard} from '../src/components/gameBoard'
 const player1gameBoard = gameBoard('me')
+player1gameBoard.populateBoard(3, [3,4])
 
     test('checks tile creation', () =>{
         expect(player1gameBoard.tileContainer.length).toBe(50)
@@ -32,4 +33,9 @@ const player1gameBoard = gameBoard('me')
         player1gameBoard.registerHit(3)
         player1gameBoard.registerHit(4)
         expect(boat.checkHitsRegistered()).toBe(2)
+    })
+
+    test('check to see if boat occupies space', () =>{
+        expect(player1gameBoard.checkIfOccupied(3)).toBe(true)
+        expect(player1gameBoard.checkIfOccupied(4)).toBe(true)
     })
