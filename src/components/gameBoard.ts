@@ -1,5 +1,5 @@
-import { tile } from "../assets/tile";
-import { Tile } from "../assets/tile";
+import { tile } from "./tile";
+import { Tile } from "./tile";
 //this was done to have a easy way to group all tiles of one player
 export const gameBoard = (player:string) => {
     const tileContainer:Tile[] = [];
