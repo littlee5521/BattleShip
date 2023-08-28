@@ -39,3 +39,7 @@ player1gameBoard.populateBoard(3, [3,4])
         expect(player1gameBoard.checkIfOccupied(3)).toBe(true)
         expect(player1gameBoard.checkIfOccupied(4)).toBe(true)
     })
+
+    test('check overlap system', () =>{
+        expect(player1gameBoard.populateBoard(1,[3])).toBe('This area is full')
+    })

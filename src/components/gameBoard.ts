@@ -13,10 +13,23 @@ export const gameBoard = (player:string) => {
     ]
 
     const populateBoard = (length:number, location:number[]) =>{
-        boatContainer.push(battleShip(length,location))
-        location.forEach((cord) =>{
-            makeOccupied(cord)
-        })
+        let isValid = true
+        location.forEach((cord) => {
+            if(checkIfOccupied(cord)) {
+                isValid = false
+            }
+            }
+        )
+        if(isValid==true) {
+            boatContainer.push(battleShip(length,location))
+            location.forEach((cord) =>{
+                makeOccupied(cord)
+          })
+        }
+        else{
+            return 'This area is full'
+        }
+        
     }
 
     const checkIfOccupied = (location:number) =>{
