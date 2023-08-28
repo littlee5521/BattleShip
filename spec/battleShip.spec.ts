@@ -1,5 +1,5 @@
 import {battleShip} from '../src/components/battleShip'
-const oneShip = battleShip(3)
+const oneShip = battleShip(3, [5])
 
     test('test battleship creation', () =>{
         expect(oneShip.checkIsSunk()).toBe(false)

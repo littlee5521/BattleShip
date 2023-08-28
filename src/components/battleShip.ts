@@ -1,4 +1,4 @@
-export const battleShip = (length:number) =>{
+export const battleShip = (length:number, location:number[]):Ship =>{
   let hitsRegistered = 0
   let isSunk = false
 
@@ -17,6 +17,19 @@ export const battleShip = (length:number) =>{
     return isSunk
   }
 
-  return {checkHitsRegistered, checkIsSunk, registerHit, length}
+  const retrieveLocation = () =>{
+    return location
+  }
 
+  return {checkHitsRegistered, checkIsSunk, registerHit, length, retrieveLocation, location}
+
+}
+
+export interface Ship {
+  length: number;
+  location: number[];
+  checkIsSunk: () => boolean;
+  registerHit: () => void;
+  checkHitsRegistered: () => number;
+  retrieveLocation: () => number[];
 }
