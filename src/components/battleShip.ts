@@ -1,12 +1,22 @@
 export const battleShip = (length:number) =>{
-  let hitsRegistered = 1
+  let hitsRegistered = 0
   let isSunk = false
+
   const registerHit = () =>{
-    hitsRegistered = hitsRegistered-1 
+    hitsRegistered = hitsRegistered+1 
     if(hitsRegistered==length) {
       isSunk=true
     }
   }
-  return {hitsRegistered, isSunk, registerHit}
+
+  const checkHitsRegistered = () =>{
+    return hitsRegistered
+  }
+
+  const checkIsSunk = () =>{
+    return isSunk
+  }
+
+  return {checkHitsRegistered, checkIsSunk, registerHit, length}
 
 }
