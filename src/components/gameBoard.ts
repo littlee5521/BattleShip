@@ -11,9 +11,13 @@ export const gameBoard = (player:string) => {
         return  tileContainer[location].checkIsOccupied()
     }
 
+    const checkIfHit = (location:number) =>{
+        return tileContainer[location].checkIsHit()
+    }
+
     const makeOccupied = (location:number) =>{
         tileContainer[location].makeOccupied();
     }
 
-    return {tileContainer, makeOccupied, checkIfOccupied}
+    return {tileContainer, makeOccupied, checkIfOccupied, checkIfHit}
 }

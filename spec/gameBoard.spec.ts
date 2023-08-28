@@ -14,6 +14,10 @@ const player1gameBoard = gameBoard('me')
             expect(player1gameBoard.tileContainer[0].checkIsOccupied()).toBe(true)
     })
 
+    test('check is hit', () =>{
+        expect(player1gameBoard.checkIfHit(0)).toBe(false)
+    })
+
 
 
 
