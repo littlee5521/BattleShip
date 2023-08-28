@@ -1,4 +1,13 @@
-    export    const tile = (location:number) =>{
+import { ArrowFunction } from "typescript"
+export interface Tile {
+    registerHit: () => void;
+    makeOccupied: () => void;
+    checkIsHit: () => boolean;
+    checkIsOccupied: () => boolean;
+    location: number;
+}
+
+    export    const tile = (location:number):Tile =>{
         let isHit = false
         let isOccupied = false
 
