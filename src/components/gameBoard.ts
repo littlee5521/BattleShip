@@ -7,9 +7,13 @@ export const gameBoard = (player:string) => {
         tileContainer.push(tile(i))
     ]
 
+    const checkIfOccupied = (location:number) =>{
+        return  tileContainer[location].checkIsOccupied()
+    }
+
     const makeOccupied = (location:number) =>{
         tileContainer[location].makeOccupied();
     }
 
-    return {tileContainer, makeOccupied}
+    return {tileContainer, makeOccupied, checkIfOccupied}
 }
