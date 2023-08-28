@@ -19,5 +19,9 @@ export const gameBoard = (player:string) => {
         tileContainer[location].makeOccupied();
     }
 
-    return {tileContainer, makeOccupied, checkIfOccupied, checkIfHit}
+    const registerHit = (location:number) =>{
+        tileContainer[location].registerHit()
+    }
+
+    return {tileContainer, makeOccupied, checkIfOccupied, checkIfHit, registerHit}
 }

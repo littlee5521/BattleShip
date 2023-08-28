@@ -18,6 +18,10 @@ const player1gameBoard = gameBoard('me')
         expect(player1gameBoard.checkIfHit(0)).toBe(false)
     })
 
+    test('simulates a hit,', () =>{
+        player1gameBoard.registerHit(0)
+        expect(player1gameBoard.checkIfHit(0)).toBe(true)
+    } )
 
 
 
