@@ -1,70 +1,63 @@
-import { tile } from "./tile";
-import { Tile } from "./tile";
-import { battleShip } from "./battleShip";
-import { Ship } from "./battleShip";
+import { tile } from './tile';
+import { Tile } from './tile';
+import { battleShip } from './battleShip';
+import { Ship } from './battleShip';
 //this was done to have a easy way to group all tiles of one player
-export const gameBoard = (player:string) => {
-    const tileContainer:Tile[] = [];
+export const gameBoard = (player: string) => {
+  const tileContainer: Tile[] = [];
 
-    const boatContainer:Ship[] = []
+  const boatContainer: Ship[] = [];
 
-    for (let i = 0; i<50; i++) [
-        tileContainer.push(tile(i))
-    ]
+  for (let i = 0; i < 50; i++) [tileContainer.push(tile(i))];
 
-    const populateBoard = (length:number, location:number[]) =>{
-        let isValid = true
-        location.forEach((cord) => {
-            if(checkIfOccupied(cord)) {
-                isValid = false
-            }
-            }
-        )
-        if(isValid==true) {
-            boatContainer.push(battleShip(length,location))
-            location.forEach((cord) =>{
-                makeOccupied(cord)
-          })
-        }
-        else{
-            return 'This area is full'
-        }
-        
+  const populateBoard = (length: number, location: number[]) => {
+    let isValid = true;
+    location.forEach((cord) => {
+      if (checkIfOccupied(cord)) {
+        isValid = false;
+      }
+    });
+    if (isValid == true) {
+      boatContainer.push(battleShip(length, location));
+      location.forEach((cord) => {
+        makeOccupied(cord);
+      });
+    } else {
+      return 'Ships can not overlap';
     }
+  };
 
-    const checkIfOccupied = (location:number) =>{
-        return  tileContainer[location].checkIsOccupied()
+  const checkIfOccupied = (location: number) => {
+    return tileContainer[location].checkIsOccupied();
+  };
+
+  const checkIfHit = (location: number) => {
+    return tileContainer[location].checkIsHit();
+  };
+
+  const makeOccupied = (location: number) => {
+    tileContainer[location].makeOccupied();
+  };
+
+  //this is a bit convulted. I think i can refactor it to not have to go through so many steps
+
+  const registerHit = (location: number) => {
+    if (checkIfHit(location) == false) {
+      tileContainer[location].registerHit();
+      boatContainer.forEach((boat) => {
+        const locationArray: number[] = boat.retrieveLocation();
+        locationArray.forEach((cord) => {
+          if (cord == location) {
+            boat.registerHit();
+          }
+        });
+      });
     }
+  };
 
-    const checkIfHit = (location:number) =>{
-        return tileContainer[location].checkIsHit()
-    }
+  const retrieveBoatContainer = () => {
+    return boatContainer;
+  };
 
-    const makeOccupied = (location:number) =>{
-        tileContainer[location].makeOccupied();
-    }
-
-    //this is a bit convulted. I think i can refactor it to not have to go through so many steps
-
-    const registerHit = (location:number) =>{
-        if(checkIfHit(location)==false){
-            
-            tileContainer[location].registerHit()
-            boatContainer.forEach((boat) =>{
-                const locationArray:number[] = boat.retrieveLocation();
-                locationArray.forEach((cord) =>{
-                    if(cord==location) {
-                        boat.registerHit();
-                    }
-                })
-            })
-
-        }
-    }
-
-    const retrieveBoatContainer = () =>{
-        return boatContainer
-    }
-
-    return {tileContainer, makeOccupied, checkIfOccupied, checkIfHit, registerHit,retrieveBoatContainer, populateBoard}
-}
+  return { tileContainer, makeOccupied, checkIfOccupied, checkIfHit, registerHit, retrieveBoatContainer, populateBoard };
+};
