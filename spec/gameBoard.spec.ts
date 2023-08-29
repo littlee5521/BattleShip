@@ -2,7 +2,7 @@ import { gameBoard } from '../src/components/gameBoard';
 
 test('checks tile creation', () => {
   const player1gameBoard = gameBoard('me');
-  expect(player1gameBoard.tileContainer.length).toBe(50);
+  expect(player1gameBoard.tileContainer.length).toBe(100);
 });
 
 test('checks if occupy checker works', () => {

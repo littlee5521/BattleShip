@@ -3,12 +3,23 @@ import { Tile } from './tile';
 import { battleShip } from './battleShip';
 import { Ship } from './battleShip';
 //this was done to have a easy way to group all tiles of one player
-export const gameBoard = (player: string) => {
+export const gameBoard = (player: string): GameBoard => {
   const tileContainer: Tile[] = [];
-
   const boatContainer: Ship[] = [];
+  let remaningBoats = 5;
 
-  for (let i = 0; i < 50; i++) [tileContainer.push(tile(i))];
+  for (let i = 0; i < 100; i++) [tileContainer.push(tile(i))];
+
+  const removeBoat = () => {
+    let playerIsDead = false;
+    remaningBoats = remaningBoats - 1;
+    if (remaningBoats == 0) {
+      playerIsDead = true;
+      return playerIsDead;
+    } else {
+      return playerIsDead;
+    }
+  };
 
   const populateBoard = (length: number, location: number[]) => {
     let isValid = true;
@@ -49,6 +60,9 @@ export const gameBoard = (player: string) => {
         locationArray.forEach((cord) => {
           if (cord == location) {
             boat.registerHit();
+            if (boat.checkIsSunk() == true) {
+              removeBoat();
+            }
           }
         });
       });
@@ -61,3 +75,13 @@ export const gameBoard = (player: string) => {
 
   return { tileContainer, makeOccupied, checkIfOccupied, checkIfHit, registerHit, retrieveBoatContainer, populateBoard };
 };
+
+export interface GameBoard {
+  tileContainer: Tile[];
+  makeOccupied(location: number): void;
+  checkIfOccupied(location: number): boolean;
+  checkIfHit(location: number): boolean;
+  registerHit(location: number): void;
+  retrieveBoatContainer(): Ship[];
+  populateBoard(length: number, location: number[]): string | void;
+}
