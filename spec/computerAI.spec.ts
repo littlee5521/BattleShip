@@ -11,10 +11,18 @@ test('three tiles in player board will be hit', () => {
   let hitAmount = 0;
 
   playerTiles.forEach((tile) => {
-    if (tile.checkIsHit() == true) {
+    if (tile.checkIsHit()) {
       hitAmount++;
     }
   });
 
   expect(hitAmount).toBe(3);
+});
+
+test('there will be a boat on board', () => {
+  const playersGameBoard = gameBoard('me');
+  const comp = computerAi(playersGameBoard);
+
+  comp.placeBoats();
+  expect(comp.compPlayBoard.retrieveBoatContainer().length).toBeGreaterThanOrEqual(1);
 });
