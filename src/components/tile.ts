@@ -1,4 +1,3 @@
-import { ArrowFunction } from 'typescript';
 export interface Tile {
   registerHit: () => void;
   makeOccupied: () => void;

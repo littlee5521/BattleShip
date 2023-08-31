@@ -26,27 +26,37 @@ export const computerAi = (enemyBoard: GameBoard) => {
       while (compPlayBoard.checkIfOccupied(boatLocation)) {
         boatLocation = Math.floor(Math.random() * 100);
       }
+      //for manipulating cords
       const cordArray = convertCoords(boatLocation);
       const yCord = cordArray[0] * 10;
       const xCord = cordArray[1];
-      let isUpValid = false;
       const upArray: number[] = [yCord + xCord];
+      // tracks the state of what placements are valid
+      let isUpValid = false;
       let isDownValid = false;
       let isLeftValid = false;
       let isRightValid = false;
       let isValid = 1;
+      let distanceFromOrgin = 1;
       //will check for up
       for (let x = 1; x < boatSizeArray[i]; x++) {
-        if (yCord + x * 10 <= 99 && yCord + x * 10 >= 0 && compPlayBoard.checkIfOccupied(yCord + x * 10 + xCord) == false) {
+        if (yCord + distanceFromOrgin * 10 <= 99 && compPlayBoard.checkIfOccupied(yCord + distanceFromOrgin * 10 + xCord) == false) {
           isValid++;
-          upArray.push(yCord + x * 10 + xCord);
+          upArray.push(yCord + distanceFromOrgin * 10 + xCord);
+          distanceFromOrgin++;
           if (isValid == boatSizeArray[i]) {
             console.log(upArray);
             console.log('new boat');
+            isValid = 1;
+            distanceFromOrgin = 1;
             isUpValid = true;
           }
         }
       }
+      // will check down
+      // for(let x = 1; x<boatSizeArray[i]; x++){
+      //   if(yCord - distanceFromOrgin * 10 )
+      // }
       if (isUpValid == true) {
         compPlayBoard.populateBoard(boatSizeArray[i], upArray);
       }
