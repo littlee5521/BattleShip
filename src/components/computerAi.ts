@@ -1,65 +1,29 @@
 import { gameBoard } from './gameBoard';
 import { GameBoard } from './gameBoard';
+import { playerUtilities } from './playerUtilites';
 
 export const computerAi = (enemyBoard: GameBoard) => {
   const compPlayBoard = gameBoard('comp');
   const knownLocation: number[] = [];
+  //this array reprsents the ways a boat can be placed
+  const locationManipulationArray = [1, -1, 10, -10];
+  const playerUtils = playerUtilities();
   let knownHits = 0;
   //this is more of a utility function, put here for now for sake of speed
-  const convertCoords = (location: number) => {
-    if (location < 10) {
-      const convertedCoord: number[] = [];
-      convertedCoord.push(0);
-      convertedCoord.push(location);
-      return convertedCoord;
-    } else {
-      const temp = location.toString().split('');
-      const convertedCoord = temp.map(Number);
-      return convertedCoord;
-    }
-  };
-
   const placeBoats = () => {
     const boatSizeArray = [5, 4, 3, 3, 2];
     for (let i = 0; i < 5; i++) {
-      let boatLocation = Math.floor(Math.random() * 100);
-      while (compPlayBoard.checkIfOccupied(boatLocation)) {
-        boatLocation = Math.floor(Math.random() * 100);
+      const currentBoatSize = boatSizeArray[i];
+      const placementMethodSelector = Math.floor(Math.random() * 4) + 1;
+      //will place down
+      if (placementMethodSelector == 1) {
+        playerUtils.boatLocationChooser(compPlayBoard, locationManipulationArray[0], currentBoatSize);
       }
-      //for manipulating cords
-      const cordArray = convertCoords(boatLocation);
-      const yCord = cordArray[0] * 10;
-      const xCord = cordArray[1];
-      const upArray: number[] = [yCord + xCord];
-      // tracks the state of what placements are valid
-      let isUpValid = false;
-      let isDownValid = false;
-      let isLeftValid = false;
-      let isRightValid = false;
-      let isValid = 1;
-      let distanceFromOrgin = 1;
-      //will check for up
-      for (let x = 1; x < boatSizeArray[i]; x++) {
-        if (yCord + distanceFromOrgin * 10 <= 99 && compPlayBoard.checkIfOccupied(yCord + distanceFromOrgin * 10 + xCord) == false) {
-          isValid++;
-          upArray.push(yCord + distanceFromOrgin * 10 + xCord);
-          distanceFromOrgin++;
-          if (isValid == boatSizeArray[i]) {
-            console.log(upArray);
-            console.log('new boat');
-            isValid = 1;
-            distanceFromOrgin = 1;
-            isUpValid = true;
-          }
-        }
-      }
-      // will check down
-      // for(let x = 1; x<boatSizeArray[i]; x++){
-      //   if(yCord - distanceFromOrgin * 10 )
-      // }
-      if (isUpValid == true) {
-        compPlayBoard.populateBoard(boatSizeArray[i], upArray);
-      }
+      //will place up
+
+      //will place forward
+
+      //will place back
     }
   };
 

@@ -23,5 +23,6 @@ test('there will be a boat on board', () => {
   const playersGameBoard = gameBoard('me');
   const comp = computerAi(playersGameBoard);
   comp.placeBoats();
+  console.log(comp.compPlayBoard.retrieveBoatContainer());
   expect(comp.compPlayBoard.retrieveBoatContainer().length).toBeGreaterThanOrEqual(1);
 });
