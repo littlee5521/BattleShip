@@ -17,13 +17,20 @@ export const computerAi = (enemyBoard: GameBoard) => {
       const placementMethodSelector = Math.floor(Math.random() * 4) + 1;
       //will place down
       if (placementMethodSelector == 1) {
-        playerUtils.boatLocationChooser(compPlayBoard, locationManipulationArray[0], currentBoatSize);
+        playerUtils.boatLocationChooser(compPlayBoard, locationManipulationArray[3], currentBoatSize);
       }
       //will place up
-
+      if (placementMethodSelector == 2) {
+        playerUtils.boatLocationChooser(compPlayBoard, locationManipulationArray[2], currentBoatSize);
+      }
       //will place forward
-
+      if (placementMethodSelector == 3) {
+        playerUtils.boatLocationChooser(compPlayBoard, locationManipulationArray[0], currentBoatSize);
+      }
       //will place back
+      if (placementMethodSelector == 4) {
+        playerUtils.boatLocationChooser(compPlayBoard, locationManipulationArray[1], currentBoatSize);
+      }
     }
   };
 
